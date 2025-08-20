@@ -1,50 +1,86 @@
-// Types kept near data so they’re reusable
-export type LinkItem = { label: string; href?: string; badge?: string };
-export type Column = { title: string; links: LinkItem[] };
-export type NavItem = {
-  label: string;
-  columns: Column[];
-  highlight?: { title: string; desc: string; cta: string; href: string };
+// app/components/navigation/data/nav.data.ts
+
+// Type definitions
+export type NavColumn = {
+  title: string;
+  links: { label: string; href: string }[];
 };
 
-// BAPI-like top-level families
+export type NavItem = {
+  label: string;
+  columns: NavColumn[];
+  highlight?: {
+    title: string;
+    desc: string;
+    cta: string;
+    href: string;
+  };
+};
+
+// Mock data for testing the mega menu
 export const NAV: NavItem[] = [
   {
-    label: 'Temperature',
+    label: 'Products',
     columns: [
       {
-        title: 'Form Factor',
+        title: 'Sensors',
         links: [
-          { label: 'Room / Wall', href: '#' },
-          { label: 'Duct', href: '#' },
-          { label: 'Immersion / Well', href: '#' },
-          { label: 'Outdoor', href: '#' },
-          { label: 'Averaging', href: '#' },
-          { label: 'Wireless', href: '#', badge: 'Popular' },
+          { label: 'Temperature', href: '#' },
+          { label: 'Humidity', href: '#' },
+          { label: 'Wireless', href: '#' },
         ],
       },
       {
-        title: 'Signals',
+        title: 'Controllers',
         links: [
-          { label: 'RTD / Thermistor', href: '#' },
-          { label: '4–20 mA / 0–10 V', href: '#' },
-          { label: 'BACnet', href: '#' },
+          { label: 'Wall Units', href: '#' },
+          { label: 'Zone Controllers', href: '#' },
+          { label: 'Integration', href: '#' },
         ],
       },
       {
-        title: 'Featured',
+        title: 'Accessories',
         links: [
-          { label: 'High Accuracy', href: '#' },
-          { label: 'Harsh Environments', href: '#' },
+          { label: 'Mounting Kits', href: '#' },
+          { label: 'Power Supplies', href: '#' },
+          { label: 'Adapters', href: '#' },
         ],
       },
     ],
     highlight: {
-      title: 'BAPI‑Backed® Quality',
-      desc: 'Calibrated sensors, documented accuracy, industry‑leading support.',
-      cta: 'See program',
+      title: 'BAPI-Backed Guarantee',
+      desc: 'Learn about our quality promise and industry-leading warranty.',
+      cta: 'Read more',
       href: '#',
     },
   },
-  // ... Humidity, Pressure, Air Quality, Accessories, Applications, Resources, Support, About (unchanged)
+  {
+    label: 'Resources',
+    columns: [
+      {
+        title: 'Documentation',
+        links: [
+          { label: 'Application Notes', href: '#' },
+          { label: 'Catalogs', href: '#' },
+          { label: 'Whitepapers', href: '#' },
+        ],
+      },
+      {
+        title: 'Support',
+        links: [
+          { label: 'Contact Us', href: '#' },
+          { label: 'Warranty Info', href: '#' },
+          { label: 'RMA Form', href: '#' },
+        ],
+      },
+      {
+        title: 'Media',
+        links: [
+          { label: 'Videos', href: '#' },
+          { label: 'Case Studies', href: '#' },
+          { label: 'Press Releases', href: '#' },
+        ],
+      },
+    ],
+  },
 ];
