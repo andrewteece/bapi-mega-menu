@@ -61,7 +61,7 @@ export default function MobileDrawer({
                           data-analytics={`nav:${group.label}:${l.label}`}
                           onClick={() => onOpen(false)}
                         >
-                          {l.label}
+                          <span>{l.label}</span>
                           {l.badge ? (
                             <span className='ml-2 rounded bg-neutral-100 px-1.5 py-0.5 text-[10px] font-semibold text-neutral-700'>
                               {l.badge}
