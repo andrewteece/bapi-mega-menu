@@ -202,7 +202,7 @@ export default function DesktopMegaItem({
                 </p>
                 <Link
                   href='/products/temperature'
-                  className='mt-2 inline-block text-sm font-medium text-white hover:underline'
+                  className='mt-2 inline-block text-sm font-medium text-gray-600 hover:underline'
                 >
                   Compare now →
                 </Link>
