@@ -8,27 +8,83 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Menu, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { NAV } from '@/components/navigation/data/nav.data';
 
-export function MobileMenu() {
+type MobileMenuProps = {
+  open: boolean;
+  onOpen: (v: boolean) => void;
+};
+
+export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={onOpen}>
+      {/* Trigger (hidden on desktop) */}
       <SheetTrigger asChild>
-        <Button variant='outline' size='icon' aria-label='Open menu'>
-          <Menu className='w-5 h-5' />
-        </Button>
+        <button
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          className='
+            group relative md:hidden
+            inline-flex h-10 w-10 items-center justify-center
+            rounded-md border border-white/20 bg-white/5
+            hover:bg-white/10 active:bg-white/15
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
+            motion-safe:transition-transform motion-safe:duration-200 hover:scale-110 active:scale-95
+            will-change-transform
+          '
+        >
+          {/* hamburger -> X with micro-stagger */}
+          <span
+            className={`
+              absolute block h-0.5 w-6 rounded bg-white
+              motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out
+              ${
+                open
+                  ? 'translate-y-0 rotate-45 delay-75'
+                  : '-translate-y-2 rotate-0 delay-0'
+              }
+            `}
+          />
+          <span
+            className={`
+              absolute block h-0.5 w-6 rounded bg-white
+              motion-safe:transition-opacity motion-safe:duration-200
+              ${open ? 'opacity-0' : 'opacity-100'}
+            `}
+          />
+          <span
+            className={`
+              absolute block h-0.5 w-6 rounded bg-white
+              motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out
+              ${
+                open
+                  ? 'translate-y-0 -rotate-45 delay-100'
+                  : 'translate-y-2 rotate-0 delay-75'
+              }
+            `}
+          />
+        </button>
       </SheetTrigger>
 
-      <SheetContent side='left' className='w-80'>
-        {/* Visible, accessible title (satisfies Radix a11y) */}
+      {/* Drawer (hidden on desktop) */}
+      {/* Hide the default shadcn close button (the gray X) and add smooth slide+fade */}
+      <SheetContent
+        side='left'
+        className='
+          w-80 md:hidden [&>button.absolute]:hidden
+          motion-safe:transition-all motion-safe:duration-300 motion-safe:ease-in-out
+          motion-safe:transform motion-safe:will-change-transform
+          data-[state=closed]:opacity-0 data-[state=closed]:-translate-x-full
+        '
+        aria-label='Main navigation'
+      >
         <SheetHeader>
           <SheetTitle>Main Navigation</SheetTitle>
         </SheetHeader>
@@ -46,7 +102,7 @@ export function MobileMenu() {
                     {(item.columns ?? []).map((col) => (
                       <div key={col.title} className='space-y-2'>
                         {col.title && (
-                          <div className='text-xs font-semibold tracking-wide uppercase text-neutral-500'>
+                          <div className='text-xs font-semibold tracking-wide uppercase text-brand'>
                             {col.title}
                           </div>
                         )}
@@ -55,10 +111,11 @@ export function MobileMenu() {
                             <li key={link.label}>
                               <Link
                                 href={link.href}
-                                className='flex items-center justify-between rounded-md px-2 py-1.5 text-[15px] hover:bg-neutral-100'
+                                onClick={() => onOpen(false)}
+                                className='flex items-center justify-between rounded-md px-2 py-1.5 text-[15px] text-neutral-800 transition hover:bg-brand/10 hover:text-brand'
                               >
                                 <span>{link.label}</span>
-                                <ChevronRight className='w-4 h-4 text-neutral-400' />
+                                <ChevronRight className='h-4 w-4 text-neutral-400' />
                               </Link>
                             </li>
                           ))}
@@ -71,24 +128,16 @@ export function MobileMenu() {
             ))}
           </Accordion>
 
-          {/* Extra static links */}
           <div className='mt-6 space-y-1'>
-            <div className='text-xs font-semibold tracking-wide uppercase text-neutral-500'>
+            <div className='text-xs font-semibold uppercase tracking-wide text-neutral-500'>
               Other
             </div>
             <ul className='space-y-1'>
-              {/* <li>
-                <Link
-                  href='/resources'
-                  className='block rounded-md px-2 py-1.5 text-[15px] hover:bg-neutral-100'
-                >
-                  Resources
-                </Link>
-              </li> */}
               <li>
                 <Link
                   href='/contact'
-                  className='block rounded-md px-2 py-1.5 text-[15px] hover:bg-neutral-100'
+                  onClick={() => onOpen(false)}
+                  className='block rounded-md px-2 py-1.5 text-[15px] text-neutral-800 transition hover:bg-brand/10 hover:text-brand'
                 >
                   Contact
                 </Link>

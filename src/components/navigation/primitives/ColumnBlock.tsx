@@ -1,24 +1,31 @@
-// src/components/navigation/primitives/ColumnBlock.tsx
 'use client';
 
-import type { NavColumn } from '../data/nav.data';
+import type { NavColumn, NavLink } from '../data/nav.data';
 
 export default function ColumnBlock({ title, links }: NavColumn) {
   return (
-    <div className='min-w-[200px]'>
+    <div className='min-w-[220px]'>
       {title && (
-        <h4 className='mb-2 text-xs font-semibold tracking-wide uppercase text-neutral-500'>
+        <h4 className='mb-2 text-[11px] font-semibold uppercase tracking-wide text-brand'>
           {title}
         </h4>
       )}
-      <ul className='space-y-1'>
-        {links.map((l) => (
-          <li key={l.label}>
+      <ul className='space-y-1.5' role='menu' aria-label={title ?? 'Links'}>
+        {links.map((l: NavLink) => (
+          <li key={l.label} role='menuitem'>
             <a
               href={l.href}
-              className='block rounded-md px-2 py-1.5 text-[15px] hover:bg-neutral-100'
+              className='group flex items-center justify-between rounded-md px-2 py-1.5 text-[15px] leading-tight text-neutral-800 transition-colors hover:bg-brand/10 hover:text-brand'
             >
-              {l.label}
+              <span className='inline-flex items-center gap-2'>
+                <span className='h-1.5 w-1.5 rounded-full bg-neutral-300 transition-colors group-hover:bg-brand' />
+                {l.label}
+              </span>
+              {l.badge ? (
+                <span className='ml-2 rounded bg-brand/10 px-1.5 py-0.5 text-[10px] font-semibold text-brand'>
+                  {l.badge}
+                </span>
+              ) : null}
             </a>
           </li>
         ))}
