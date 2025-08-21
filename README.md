@@ -5,7 +5,6 @@ This project demonstrates a scalable, data-driven mega-menu for BAPI-style produ
 
 ---
 
-[![Vercel Deploy Status](https://vercel.com/api/render/deployments/badge?projectId=bapi-mega-menu)](https://bapi-mega-menu-63pcplukx-andrewteeces-projects.vercel.app/)
 [![Live Demo](https://img.shields.io/badge/demo-online-green?style=for-the-badge&logo=vercel)](https://bapi-mega-menu-63pcplukx-andrewteeces-projects.vercel.app/)
 
 ---
