@@ -25,7 +25,7 @@ type MobileMenuProps = {
 export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
   return (
     <Sheet open={open} onOpenChange={onOpen}>
-      {/* Trigger (hidden on desktop) */}
+      {/* Trigger */}
       <SheetTrigger asChild>
         <button
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -33,17 +33,17 @@ export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
           className='
             group relative md:hidden
             inline-flex h-10 w-10 items-center justify-center
-            rounded-md border border-white/20 bg-white/5
-            hover:bg-white/10 active:bg-white/15
-            focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
+            rounded-md border border-white/20 bg-white/5 hover:bg-white/10 active:bg-white/15
+            text-white dark:text-white
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2
             motion-safe:transition-transform motion-safe:duration-200 hover:scale-110 active:scale-95
             will-change-transform
           '
         >
-          {/* hamburger -> X with micro-stagger */}
+          {/* Hamburger lines (inherit currentColor) */}
           <span
             className={`
-              absolute block h-0.5 w-6 rounded bg-white
+              absolute block h-0.5 w-6 rounded bg-current
               motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out
               ${
                 open
@@ -54,14 +54,14 @@ export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
           />
           <span
             className={`
-              absolute block h-0.5 w-6 rounded bg-white
+              absolute block h-0.5 w-6 rounded bg-current
               motion-safe:transition-opacity motion-safe:duration-200
               ${open ? 'opacity-0' : 'opacity-100'}
             `}
           />
           <span
             className={`
-              absolute block h-0.5 w-6 rounded bg-white
+              absolute block h-0.5 w-6 rounded bg-current
               motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out
               ${
                 open
@@ -73,8 +73,7 @@ export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
         </button>
       </SheetTrigger>
 
-      {/* Drawer (hidden on desktop) */}
-      {/* Hide the default shadcn close button (the gray X) and add smooth slide+fade */}
+      {/* Drawer */}
       <SheetContent
         side='left'
         className='
@@ -82,11 +81,15 @@ export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
           motion-safe:transition-all motion-safe:duration-300 motion-safe:ease-in-out
           motion-safe:transform motion-safe:will-change-transform
           data-[state=closed]:opacity-0 data-[state=closed]:-translate-x-full
+          bg-white text-neutral-900 border-neutral-200
+          dark:bg-neutral-900 dark:text-neutral-100 dark:border-neutral-800
         '
         aria-label='Main navigation'
       >
         <SheetHeader>
-          <SheetTitle>Main Navigation</SheetTitle>
+          <SheetTitle className='dark:text-neutral-100'>
+            Main Navigation
+          </SheetTitle>
         </SheetHeader>
 
         <nav className='mt-4'>
@@ -96,13 +99,12 @@ export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
                 <AccordionTrigger className='text-base font-medium'>
                   {item.label}
                 </AccordionTrigger>
-
                 <AccordionContent>
                   <div className='space-y-3'>
                     {(item.columns ?? []).map((col) => (
                       <div key={col.title} className='space-y-2'>
                         {col.title && (
-                          <div className='text-xs font-semibold tracking-wide uppercase text-brand'>
+                          <div className='text-xs font-semibold tracking-wide uppercase text-brand dark:text-brand-light'>
                             {col.title}
                           </div>
                         )}
@@ -112,10 +114,14 @@ export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
                               <Link
                                 href={link.href}
                                 onClick={() => onOpen(false)}
-                                className='flex items-center justify-between rounded-md px-2 py-1.5 text-[15px] text-neutral-800 transition hover:bg-brand/10 hover:text-brand'
+                                className='flex items-center justify-between rounded-md px-2 py-1.5 text-[15px]
+                                           text-neutral-800 dark:text-neutral-100
+                                           transition
+                                           hover:bg-brand/10 hover:text-brand
+                                           dark:hover:bg-white/10 dark:hover:text-brand-light'
                               >
                                 <span>{link.label}</span>
-                                <ChevronRight className='h-4 w-4 text-neutral-400' />
+                                <ChevronRight className='h-4 w-4 text-neutral-400 dark:text-neutral-500' />
                               </Link>
                             </li>
                           ))}
@@ -129,7 +135,7 @@ export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
           </Accordion>
 
           <div className='mt-6 space-y-1'>
-            <div className='text-xs font-semibold uppercase tracking-wide text-neutral-500'>
+            <div className='text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400'>
               Other
             </div>
             <ul className='space-y-1'>
@@ -137,7 +143,11 @@ export default function MobileMenu({ open, onOpen }: MobileMenuProps) {
                 <Link
                   href='/contact'
                   onClick={() => onOpen(false)}
-                  className='block rounded-md px-2 py-1.5 text-[15px] text-neutral-800 transition hover:bg-brand/10 hover:text-brand'
+                  className='block rounded-md px-2 py-1.5 text-[15px]
+                             text-neutral-800 dark:text-neutral-100
+                             transition
+                             hover:bg-brand/10 hover:text-brand
+                             dark:hover:bg-white/10 dark:hover:text-brand-light'
                 >
                   Contact
                 </Link>

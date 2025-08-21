@@ -4,19 +4,19 @@ import * as React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import BapiMegaMenu from '../navigation/BapiMegaMenu';
-import MobileMenu from '../navigation/MobileMenu'; // default import
+import MobileMenu from '../navigation/MobileMenu';
+import ThemeToggle from '@/components/theme/ThemeToggle';
 
 export default function SiteHeader() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   return (
-    <header className='sticky top-0 z-50 w-full text-white border-b border-neutral-200 bg-brand'>
-      {/* ADD: relative to anchor mega-menu panels */}
+    <header className='sticky top-0 z-50 w-full border-b bg-brand text-white border-neutral-200 dark:bg-neutral-900 dark:text-white dark:border-neutral-800'>
       <div className='relative mx-auto flex items-center justify-between px-4 py-3 max-w-7xl sm:px-6 lg:px-8'>
         {/* Logo */}
         <Link
           href='/'
-          className='flex items-center gap-2 font-semibold text-white'
+          className='flex items-center gap-2 font-semibold text-white dark:text-white'
         >
           <span className='flex h-6 w-6 items-center justify-center rounded bg-white text-xs font-bold text-brand'>
             B
@@ -47,8 +47,11 @@ export default function SiteHeader() {
           </Link>
         </nav>
 
-        {/* Mobile hamburger (SheetTrigger is inside MobileMenu) */}
-        <MobileMenu open={mobileOpen} onOpen={setMobileOpen} />
+        {/* Right-side controls */}
+        <div className='flex items-center gap-2'>
+          <ThemeToggle />
+          <MobileMenu open={mobileOpen} onOpen={setMobileOpen} />
+        </div>
       </div>
     </header>
   );

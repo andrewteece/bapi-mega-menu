@@ -50,9 +50,8 @@ export default function DesktopMegaItem({
   }, [isOpen, onClose]);
 
   return (
-    // NOTE: remove 'relative' here so the panel anchors to the header container
     <div>
-      {/* Trigger styled for brand header */}
+      {/* Trigger */}
       <button
         ref={buttonRef}
         type='button'
@@ -93,7 +92,7 @@ export default function DesktopMegaItem({
         <span className='sr-only'>{isOpen ? 'close menu' : 'open menu'}</span>
       </button>
 
-      {/* Panel anchored to header container (centered & clamped) */}
+      {/* Panel */}
       <div
         id={panelId}
         ref={panelRef}
@@ -102,31 +101,31 @@ export default function DesktopMegaItem({
         onMouseEnter={cancelTimers}
         onMouseLeave={closeWithGrace}
         className={cn(
-          // anchor to header inner wrapper (which is now relative)
           'absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2',
-          // center within container and clamp to viewport with gutter
           'mx-auto max-w-7xl w-[min(100vw-2rem,72rem)]',
-          // panel surface
           'overflow-hidden rounded-2xl border bg-white p-4 shadow-xl ring-1 ring-black/5',
-          // motion
+          'dark:bg-neutral-900 dark:text-neutral-100 dark:border-neutral-800 dark:ring-white/10',
           'origin-top motion-safe:transition-all motion-safe:duration-200 motion-safe:ease-out',
           isOpen
             ? 'visible translate-y-0 opacity-100'
             : 'invisible -translate-y-1 opacity-0'
         )}
       >
-        {/* subtle brand wash */}
-        <div className='rounded-lg bg-brand/5 p-3'>
+        <div className='rounded-lg bg-brand/5 dark:bg-white/5 p-3'>
           {/* Top utility row */}
           <div className='mb-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between'>
             <div className='relative w-full md:max-w-xs'>
-              <span className='pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-neutral-400'>
+              <span className='pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500'>
                 🔎
               </span>
               <input
                 type='search'
                 placeholder='Search products, docs, SKUs…'
-                className='w-full rounded-md border px-8 py-2 text-sm outline-none transition focus:border-brand-light focus:ring-2 focus:ring-brand-light/40'
+                className='w-full rounded-md border px-8 py-2 text-sm outline-none transition
+                           focus:border-brand-light focus:ring-2 focus:ring-brand-light/40
+                           border-neutral-300 dark:border-neutral-700
+                           bg-white dark:bg-neutral-800
+                           text-neutral-900 dark:text-neutral-100'
               />
             </div>
 
@@ -142,7 +141,11 @@ export default function DesktopMegaItem({
                 <a
                   key={q.label}
                   href={q.href}
-                  className='rounded-md border bg-brand/80 px-2 py-1 text-sm transition hover:bg-brand/10 hover:text-brand'
+                  className='rounded-md border bg-brand/80 px-2 py-1 text-sm transition
+                             hover:bg-brand/10 hover:text-brand
+                             dark:hover:bg-white/10 dark:hover:text-brand-light
+                             border-transparent dark:border-transparent
+                             text-white dark:text-white'
                 >
                   {q.label}
                 </a>
@@ -164,13 +167,17 @@ export default function DesktopMegaItem({
               </div>
             </div>
 
-            {/* Highlight / promo rail */}
+            {/* Promo rail */}
             <div className='md:col-span-4 lg:col-span-3'>
-              <div className='rounded-xl border bg-brand-accent/10 p-4 transition hover:translate-y-0.5 hover:shadow-md'>
+              <div
+                className='rounded-xl border bg-brand-accent/10 dark:bg-brand-accent/20 dark:border-neutral-700 p-4
+                           transition hover:translate-y-0.5 hover:shadow-md
+                           dark:hover:shadow-[0_4px_16px_rgba(255,255,255,0.06)]'
+              >
                 <p className='text-sm font-semibold text-brand-accent'>
-                  BAPI‑Backed Quality
+                  BAPI-Backed Quality
                 </p>
-                <p className='mt-1 text-sm text-neutral-800'>
+                <p className='mt-1 text-sm text-neutral-800 dark:text-neutral-200'>
                   Reliable sensors and accessories for HVAC pros. Explore spec
                   sheets and application notes.
                 </p>
@@ -182,16 +189,20 @@ export default function DesktopMegaItem({
                 </Link>
               </div>
 
-              <div className='mt-3 rounded-xl border bg-white p-4'>
-                <p className='text-sm font-semibold text-neutral-900'>
+              <div
+                className='mt-3 rounded-xl border bg-white dark:bg-neutral-800 dark:border-neutral-700 p-4
+                           transition hover:translate-y-0.5 hover:shadow-md
+                           dark:hover:shadow-[0_4px_16px_rgba(255,255,255,0.06)]'
+              >
+                <p className='text-sm font-semibold text-neutral-900 dark:text-neutral-100'>
                   Need help choosing?
                 </p>
-                <p className='mt-1 text-sm text-neutral-700'>
+                <p className='mt-1 text-sm text-neutral-700 dark:text-neutral-300'>
                   Compare temperature sensors by range, accuracy, and mounting.
                 </p>
                 <Link
                   href='/products/temperature'
-                  className='mt-2 inline-block text-sm font-medium text-brand hover:underline'
+                  className='mt-2 inline-block text-sm font-medium text-white hover:underline'
                 >
                   Compare now →
                 </Link>
