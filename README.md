@@ -5,6 +5,19 @@ This project demonstrates a scalable, data-driven mega-menu for BAPI-style produ
 
 ---
 
+[![Vercel Deploy Status](https://vercel.com/api/render/deployments/badge?projectId=bapi-mega-menu)](https://bapi-mega-menu-63pcplukx-andrewteeces-projects.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/demo-online-green?style=for-the-badge&logo=vercel)](https://bapi-mega-menu-63pcplukx-andrewteeces-projects.vercel.app/)
+
+---
+
+## 📸 Preview
+
+### Desktop
+![Desktop preview of the BAPI Mega Menu](public/preview-desktop.png)
+
+### Mobile
+![Mobile preview of the BAPI Mega Menu](public/preview-mobile.png)
+
 ## 🚀 Tech Stack
 - Next.js 15 (App Router, TypeScript)
 - React 18/19 compatible
