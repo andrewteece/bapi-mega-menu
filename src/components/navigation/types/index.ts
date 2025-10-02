@@ -137,11 +137,11 @@ export const validateNavItem = (item: unknown): NavItem => {
   } catch (error) {
     if (error instanceof z.ZodError) {
       throw new NavigationError(
-        `Navigation item validation failed: ${error.errors
+        `Navigation item validation failed: ${error.issues
           .map((e: z.ZodIssue) => e.message)
           .join(', ')}`,
         'VALIDATION_ERROR',
-        { item, errors: error.errors }
+        { item, errors: error.issues }
       );
     }
     throw new NavigationError('Unknown validation error', 'UNKNOWN_ERROR', {
@@ -165,11 +165,11 @@ export const validateNavigationConfig = (config: unknown): NavigationConfig => {
   } catch (error) {
     if (error instanceof z.ZodError) {
       throw new NavigationError(
-        `Navigation config validation failed: ${error.errors
+        `Navigation config validation failed: ${error.issues
           .map((e: z.ZodIssue) => e.message)
           .join(', ')}`,
         'VALIDATION_ERROR',
-        { config, errors: error.errors }
+        { config, errors: error.issues }
       );
     }
     throw new NavigationError('Unknown validation error', 'UNKNOWN_ERROR', {

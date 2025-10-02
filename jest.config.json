@@ -1,5 +1,4 @@
 {
-  "preset": "next/babel",
   "testEnvironment": "jsdom",
   "setupFilesAfterEnv": ["<rootDir>/src/__tests__/setup.ts"],
   "testMatch": [
@@ -20,7 +19,7 @@
       "statements": 80
     }
   },
-  "moduleNameMapping": {
+  "moduleNameMappings": {
     "^@/(.*)$": "<rootDir>/src/$1"
   },
   "transform": {
